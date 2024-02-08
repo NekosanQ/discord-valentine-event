@@ -3,6 +3,9 @@ import { config } from "../utils/config.js";
 /**
  * @param interaction インタラクション
  */
+// -----------------------------------------------------------------------------------------------------------
+// チョコレートを獲得する処理
+// -----------------------------------------------------------------------------------------------------------
 module.exports = {
 	async execute(interaction: Interaction): Promise<void> {
         if (!interaction.isButton()) return;
