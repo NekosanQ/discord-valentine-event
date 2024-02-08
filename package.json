@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "@discordjs/builders": "^1.6.5",
+    "@prisma/client": "^5.4.2",
+    "@types/log4js": "^2.3.5",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.1",
+    "log4j": "^1.0.0",
+    "node-cron": "^3.0.3",
+    "pm2": "^5.3.0",
+    "toml": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node-cron": "^3.0.8",
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
+    "@typescript-eslint/parser": "^6.3.0",
+    "eslint": "^8.46.0",
+    "prettier": "3.0.3",
+    "prisma": "^5.7.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "scripts": {
+    "test": "ts-node src/index.ts",
+    "deploy": "node dist/deploy.js",
+    "prod": "pm2 start dist/index.js --name Kokone --namespace DiscordBOT",
+    "start": "node dist/index.js",
+    "restart": "pm2 restart Kokone",
+    "stop": "pm2 stop Kokone",
+    "compile": "tsc -p .",
+    "lint:prettier": "prettier --check src",
+    "fix:prettier": "prettier --write src"
+  }
+}
