@@ -61,6 +61,10 @@ client.on(Events.InteractionCreate, async (interaction) => {
 			await require("./mainProcess/checkChocolate").execute(interaction);
 			break;
 		}
+		case "selectGiveUserList": { // "渡す -> ユーザー選択"
+			await require("./mainProcess/giveChocolate").execute(interaction);
+			break;
+		}
 	}
 });
 client.login(process.env.DISCORD_TOKEN);

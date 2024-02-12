@@ -14,6 +14,7 @@ import {
     ModalBuilder,
 } from "discord.js";
 import { config } from "../utils/config.js";
+import { SelectMenuBuilder } from "@discordjs/builders";
 /**
  * バレンタインイベントの設定画面埋め込みメッセージ
  */
@@ -62,3 +63,11 @@ export const selectGiveUserMenu: ActionRowBuilder<UserSelectMenuBuilder> = new A
         .setMaxValues(1)
         .setMinValues(1)
 );
+
+/**
+ * 相手にチョコを渡すときの画面(埋め込みメッセージ)
+ */
+export const giveChocolateEmbed: EmbedBuilder = new EmbedBuilder()
+    .setColor(Number(config.botColor))
+    .setTitle("チョコレートを渡す 🍫")
+    .setDescription("下のメニューから渡したい相手を選んでください。");
