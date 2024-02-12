@@ -10,8 +10,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model BlockLists {
-    id Int @default(autoincrement()) @id
-    user_id String
-    block_user_id String
+model ValentineEvent {
+  user_id String @id
+  passed_count Int
+  received_count Int 
+  gave Boolean
 }

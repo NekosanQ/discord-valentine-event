@@ -12,21 +12,9 @@ export interface Config {
     clientId: string;
     developerGuildId: string;
     generalGuildId: string;
-    entranceChannelId: string;
-    chatChannelId: string;
-    inviteChannelId: string;
-    voiceCreateChannelId: string;
-    managementChannelId: string;
-    logChanneld: string;
-    checkMarkId: string;
-    uncertifiedRoleId: string;
-    authenticatedRoleId: string;
-    everyoneRoleId: string;
-    newMemberNoticeRoleId: string;
     botColor: string;
     errorColor: string;
-    defaultVoiceChannelList: string[];
-    inviteRoleId: string[];
+    roleIds: string[];
 };
 
 // コンフィグファイルを読み込む
