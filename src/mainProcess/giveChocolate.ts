@@ -4,6 +4,7 @@ import {
 	selectGiveUserMenu,
     giveChocolateEmbed
  } from "../module/eventController"
+import { logger } from "../utils/log";
 
 const prisma = new PrismaClient();
 
@@ -62,10 +63,11 @@ module.exports = {
                     });
                 }
             } else if (interaction.isUserSelectMenu()) {
-                const oppoentUserID: string = String(interaction.values[0]); // 送る相手のユーザーID
-                const oppoentUser = await interaction.guild?.members.fetch(oppoentUserID);
+                const executionUser = interaction.user;
+                const oppoentUserId: string = String(interaction.values[0]); // 送る相手のユーザーID
+                const oppoentUser = await interaction.guild?.members.fetch(oppoentUserId);
 
-                if (interaction.user.id == oppoentUserID) {
+                if (interaction.user.id == oppoentUserId) {
                     await interaction.editReply({
                         content: "自分自身には渡せません！"
                     });
@@ -105,7 +107,7 @@ module.exports = {
                     },
 
                     where: {
-                        user_id: oppoentUserID
+                        user_id: oppoentUserId
                     }
                 });
 
@@ -116,13 +118,13 @@ module.exports = {
                         },
 
                         where: {
-                            user_id: oppoentUserID
+                            user_id: oppoentUserId
                         }
                     });
                 } else {
                     await prisma.valentineEvent.create({
                         data: {
-                            user_id: oppoentUserID,
+                            user_id: oppoentUserId,
                             passed_count: 0,
                             received_count: 1,
                             gave: false
@@ -140,10 +142,12 @@ module.exports = {
                     }
                 });
 
+                logger.info(`[チョコ受渡] ${executionUser.displayName}/${executionUser.id} -> ${oppoentUser?.displayName}/${oppoentUser?.id} 残り個数: ${myChocolate[0].passed_count - 1}`);
 
                 await interaction.editReply({
                     content: `${oppoentUser?.displayName} にチョコレートを渡しました。\nあなたが渡せる残りのチョコレートの数: ${myChocolate[0].passed_count - 1}`
                 });
+
             }
         } catch (error) {
             console.log(error);

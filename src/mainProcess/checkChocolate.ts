@@ -1,5 +1,6 @@
 import { Interaction } from "discord.js";
 import { PrismaClient } from "@prisma/client";
+import { logger } from "../utils/log";
 const prisma = new PrismaClient();
 
 /**
@@ -28,10 +29,13 @@ module.exports = {
             });
 
             if (user[0]) {
+
+                logger.info(`[チョコ確認] ${interaction.user.displayName}/${interaction.user.id} 個数: ${user[0].received_count}`);
+                
                 await interaction.editReply({
                     content: `貰ったチョコレートの個数: ${user[0].received_count}個`
                 });
-            } else { // データがないので新規作成を検討します。
+            } else { // データがないので新規作成する
                 await prisma.valentineEvent.create({
                     data: {
                         user_id: interaction.user.id,

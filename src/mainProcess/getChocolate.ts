@@ -1,6 +1,7 @@
 import { Interaction } from "discord.js";
 import { config } from "../utils/config.js";
 import { PrismaClient } from "@prisma/client";
+import { logger } from "../utils/log.js";
 
 const prisma = new PrismaClient();
 
@@ -67,8 +68,10 @@ module.exports = {
                 });
             }
 
+            logger.info(`[チョコ取得] ${interaction.user.displayName}/${interaction.user.id} 個数: ${chocolateNum}`);
+
             await interaction.editReply({
-                content: `チョコレートを${chocolateNum}個渡しました`
+                content: `チョコレートを${chocolateNum}個獲得しました`
             });
         } catch(error) {
             console.log(error);
